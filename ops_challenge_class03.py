@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-# Script:
-# Purpose:
-# Why: 
+# Script: Uptime sensor pt 2
+# Purpose: Implement email notifications for status changes
+# Why: Keep administrators/users aware of network status changes as part of monitoring process
 
 import smtplib
 from email.mime.text import MIMEText
