@@ -1,3 +1,34 @@
+# From Roger's class 2 lecture
+
+# def my_function(my_list = [5, 4, 3, 2, 1]):
+#    for number in my_list:
+#        print(number)
+    # pass
+
+# import datetime
+# now = datetime.datetime.now()
+# print(now)
+
+# new_date = datetime.date(1999, 12, 31)
+# print(new_date)
+
+# import time
+
+# time_now = time.localtime() # tiime.time()
+# print(time_now)
+
+# time.sleep(5)
+# print('Did I sleep for 5 seconds')
+
+# import os
+# result = os.system('ping localhost -c 4')
+
+
+# if __name__ == "__main__":
+#    my_variable = [1, 2, 3, 4, 5]
+#    my_function(my_variable)
+#    my_function()
+
 # From Roger's class 6 lecture
 
 # Declare functions
