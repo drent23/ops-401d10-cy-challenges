@@ -10,7 +10,7 @@ import os
 
 # declare functions
 
-# generate key and save to file
+# generate key and save to file (stole this from Roger, but I call it 'borrowing')
 def write_key():
     key = Fernet.generate_key()
     with open("key.key", "wb") as key_file:
@@ -85,6 +85,11 @@ def compress_file(target_file):
 
 # main function
 def main():
+    # if not os.path.isfile("key.key"):
+    #     key = generate_key()
+    #     save_key(key)
+Add this the line under main call, it should fix it
+    write_key()
     key = load_key()
     user_mode = input("Please select whether you'd like to encrypt/decrypt a file or message: \n1 - Encrypt a file\n2 - Decrypt a file\n3 - Encrypt a message\n4 - Decrypt a message\n5 - Encrypt a folder\n6 - Decrypt a folder\n")
     # conditionals based on user input
