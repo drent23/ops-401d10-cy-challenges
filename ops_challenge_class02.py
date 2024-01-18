@@ -8,6 +8,7 @@
 from ping3 import ping
 import datetime
 import time
+import os
 
 # accept user input for target IP then transmit single ICMP (ping) packet to target IP every 2 seconds, evaluate response as success or failure, assign success or failure to status var, print status var along w/ timestamp & dest IP tested
 def user_ip():
