@@ -128,3 +128,7 @@ for root, dirs, files in os.walk("/home/david"):
         with open(file) as f:
             print(f.read())
     print('-' * 88)
+
+    # Roger's lecture class 11
+
+    # have to install scapy w/ 'pip3 install scapy' and only import modules you'll NEED to work
