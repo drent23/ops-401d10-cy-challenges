@@ -11,7 +11,7 @@ import random
 
 # assign target IP and port range to vars
 host = 'scanme.nmap.org'
-port_range = [22, 80, 443]
+port_range = [20, 21, 22, 23, 53, 69, 80, 123, 179, 264, 443, 520]
 
 # define function to scan ports
 def scan_ports(dst_port):
