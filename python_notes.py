@@ -188,10 +188,9 @@ hosts_count = 0
 for host in ip_list:
     print("Pinging", str(host), "- please wait...")
     response = sr1(
-        ip(dst=str(host))/ICMP(),
+        IP(dst=str(host))/ICMP(),
         timeout=2,
         verbose=0
     )
-print(response)
 # make sure not to ping broadcast or host IP
 

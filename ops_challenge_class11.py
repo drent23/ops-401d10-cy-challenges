@@ -6,7 +6,7 @@
 
 # import necessary modules
 import sys
-from scapy.all import IP, sr1, TCP, send
+from scapy.all import IP, sr1,TCP, send
 import random
 
 # assign target IP and port range to vars
