@@ -167,3 +167,31 @@
 
 # # response = sr1(IP(dst=host)/TCP(sport=src_port, dport=dst_port, flags='5'), timeout=1, verbose=0)
 # # print(response.show())
+
+# Roger's class 12 Lecture
+
+# ipaddress module is VERY USEFUL!
+import ipaddress
+from scapy.all import ICMP, IP, sr1, TCP
+
+ip = ipaddress.ip_address('127.0.0.1')
+print(f'{ip}: is loopback: {ip.is_loopback}')
+
+ip2 = ipaddress.ip_address('10.0.2.2')
+print(f'{ip2}')
+
+network = "10.0.2.0/24"
+ip_list = ipaddress.IPv4Network(network).hosts()
+hosts_count = 0
+
+# can't 'Ctrl+C' without doing it the # of times there are hosts
+for host in ip_list:
+    print("Pinging", str(host), "- please wait...")
+    response = sr1(
+        ip(dst=str(host))/ICMP(),
+        timeout=2,
+        verbose=0
+    )
+print(response)
+# make sure not to ping broadcast or host IP
+
