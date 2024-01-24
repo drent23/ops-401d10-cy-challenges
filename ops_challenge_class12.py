@@ -9,7 +9,6 @@ from scapy.all import IP, sr1,TCP, send, ICMP
 import random
 import ipaddress
 
-
 # define function to scan ports
 def port_scan():
     # get host/target IP address
@@ -30,16 +29,37 @@ def port_scan():
             elif response.getlayer(TCP).flags == 0x14:
                 print(f"Port {port} is closed")
 
+# define function for ICMP Ping Sweeps
 def ping_sweep():
     my_net = '192.168.0.0/24'
     num_hosts = 0
     net_ipaddrs = ipaddress.IPv4Network(my_net).hosts()
+    # loop through the ip addresses on the network to ping
     for target_ip in net_ipaddrs:
         print("Pinging", str(target_ip), "- please wait...")
         response = sr1(IP(dst=str(target_ip))/ICMP(), timeout=2, verbose=0)
-        if response == is None:
-            print(f"Target IP {target_ip} is ")
-print(response)
+        # condition based responses
+        if response is None:
+            print(f"Target IP {target_ip} is unresponsive.")
+        elif response.haslayer(ICMP):
+            if int(response.getlayer(ICMP).type) == 3 and int(response.getlayer(ICMP).code) in [1, 2, 3, 9, 10, 13]:
+                print(f"Target IP {target_ip} is actively blocking ICMP pings.")
+            else:
+                print(f"Target IP {target_ip} is responsive.")
+                num_hosts += 1
+    print(f"The current number of IPs online is {num_hosts}")
 
+# define main function to provide user a menue and tie it all together
+def main():
+    user_input = input("Please select a number for a respective task:\n1: Port Scanner\n2: Ping Sweep")
+    # user input conditional
+    if user_input == '1':
+        port_scan()
+    elif user_input == '2':
+        ping_sweep()
+    else:
+        print("Please enter only the number 1 or 2.")
 
-scan_ports(port)
+if __name__ == '__main__':
+    main()
+    
