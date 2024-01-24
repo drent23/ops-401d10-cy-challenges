@@ -7,12 +7,18 @@
 # import necessary modules
 from scapy.all import IP, sr1,TCP, send, ICMP
 import random
-import ipaddress
+from ipaddress import ip_address
 
 # define function to scan ports
 def port_scan():
-    # get host/target IP address
-    target_ip = input("Please enter the target IP of the computer on which you want to conduct either a TCP port scan: ")
+    while True:
+        try:
+            # get host/target IP address
+            target_ip = input("Please enter the target IP of the computer on which you want to conduct either a TCP port scan: ")
+            ip_address(target_ip)
+            break
+        except ValueError:
+            print("Please enter a valid IP address")
     # identify ports to scan
     port_range = [20, 21, 22, 23, 53, 69, 80, 123, 179, 264, 443, 520]
     # loop through ports on target IP address
