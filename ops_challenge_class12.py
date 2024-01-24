@@ -51,7 +51,7 @@ def ping_sweep():
 
 # define main function to provide user a menue and tie it all together
 def main():
-    user_input = input("Please select a number for a respective task:\n1: Port Scanner\n2: Ping Sweep")
+    user_input = input("Please select a number for a respective task:\n1: Port Scanner\n2: Ping Sweep\n")
     # user input conditional
     if user_input == '1':
         port_scan()
