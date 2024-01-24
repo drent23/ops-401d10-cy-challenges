@@ -23,7 +23,7 @@ def scan_ports(target_ip):
                 print(f"Port {port} is open")
             elif response.getlayer(TCP).flags == 0x14:
                 print(f"Port {port} is closed")
-def ping_sweep(target_ip)
+def ping_sweep(target_ip):
     response = sr1(IP(dst=target_ip)/ICMP(), timeout=1, verbose=0)
     if response:
         return True
