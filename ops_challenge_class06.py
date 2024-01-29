@@ -10,54 +10,49 @@ import os
 
 # declare functions
 
-# generate key and save to file
-def write_key():
-    key = Fernet.generate_key()
-    with open("key.key", "wb") as key_file:
-        key_file.write(key)
-    return key
+# load or generate key and save to file
+def gen_key():
+    try:
+        with open("key.key", "rb") as key_file:
+            secret_key = key_file.read()
+    except FileNotFoundError: 
+        secret_key = Fernet.generate_key()
+        with open("key.key", "wb") as key_file:
+            key_file.write(secret_key)
+    return secret_key
+    
 
-# loads key from current directory named 'key.key'
-def load_key():
-    return open("key.key", "rb").read()
-
-# mode 1, prompt user for target file path, encrypt file, delete existing version, and replace w/ encrypted version
-def enc_file(target_file):
-    key = load_key()
-    f = Fernet(key)
-
-    with open(target_file, "rb") as file:
-        dec_data = file.read()
+# encrypt file, delete existing version, and replace w/ encrypted version
+def encrypt_file(target_file, secret_key):
+    f = Fernet(secret_key)
+    with open(target_file, "rb") as key_file:
+        dec_data = key_file.read()
     enc_data = f.encrypt(dec_data)
     os.remove(target_file)
-    with open(target_file, "wb") as file:
-        file.write(enc_data)
+    with open(target_file, "wb") as key_file:
+        key_file.write(enc_data)
 
-# mode 2, prompt user for target file path, decrypt file, delete encrypted version, and replace w/ decrypted version
-def dec_file(target_file):
-    key = load_key()
-    f = Fernet(key)
-
-    with open(target_file, "rb") as file:
-        enc_data = file.read()
+# decrypt file, delete encrypted version, and replace w/ decrypted version
+def decrypt_file(target_file, secret_key):
+    f = Fernet(secret_key)
+    with open(target_file, "rb") as key_file:
+        enc_data = key_file.read()
     dec_data = f.decrypt(enc_data)
     os.remove(target_file)
-    with open(target_file, "wb") as file:
-        file.write(dec_data)
+    with open(target_file, "wb") as key_file:
+        key_file.write(dec_data)
 
 # mode 3, prompt user for PT string, encrypt, print/display CT string
-def enc_msg(msg):
-    key = load_key()
-    f = Fernet(key)
-    encrypted_msg = f.encrypt(msg.encode())
-    return encrypted_msg
+def encrypt_msg(dec_msg, secret_key):
+    f = Fernet(secret_key)
+    enc_msg = f.encrypt(dec_msg.encode())
+    return enc_msg
 
 # mode 4, prompt user for CT string, decrypt, print/display PT string
-def dec_msg(msg):
-    key = load_key()
-    f = Fernet(key)
-    decrypted_msg = f.decrypt(msg)
-    return decrypted_msg.decode()
+def decrypt_msg(enc_msg, secret_key):
+    f = Fernet(secret_key)
+    dec_msg = f.decrypt(enc_msg)
+    return dec_msg.decode()
 
 # compress files
 def compress_file(target_file):
@@ -67,28 +62,29 @@ def compress_file(target_file):
 
 # main function
 def main():
+    secret_key = gen_key()
     user_mode = input("Please select whether you'd like to encrypt/decrypt a file or message: \n1 - Encrypt a file\n2 - Decrypt a file\n3 - Encrypt a message\n4 - Decrypt a message\n")
     # conditionals based on user input
     if user_mode == '1':
         target_file = input("Please enter the path of your target file you want to encrypt: ")
-        enc_file(target_file)
+        encrypt_file(target_file, secret_key)
         if input("Would you like to compress the file as well? (Enter 'y' for yes or 'n' for no): ") == 'y':
             file_compress = compress_file(target_file)
             print(f"The file has been compressed and is now named {file_compress}")
     elif user_mode == '2':
         target_file = input("Please enter the path of your target file you want to decrypt: ")
-        dec_file(target_file)
+        decrypt_file(target_file, secret_key)
         if input("Would you like to compress the file as well? (Enter 'y' for yes or 'n' for no): ") == 'y':
             file_compress = compress_file(target_file)
             print(f"The file has been compressed and is now named {file_compress}")
     elif user_mode == '3':
         msg = input("Please enter a simple string you'd like to encrypt: ")
-        encrypted_msg = enc_msg(msg)
-        print("The encrypted string is as follows: ", encrypted_msg.decode())
+        encrypted_msg = encrypt_msg(msg, secret_key)
+        print(f"The encrypted string is as follows: {encrypted_msg}")
     elif user_mode == '4':
-        msg = input("Please enter the encrypted string you'd like to decrypt: ")
-        decrypted_msg = dec_msg(msg)
-        print("The decrypted string is as follows: ", decrypted_msg)
+        encrypted_msg = input("Please enter the encrypted string you'd like to decrypt: ").encode()
+        decrypted_msg = decrypt_msg(encrypted_msg, secret_key)
+        print(f"The decrypted string is as follows: {decrypted_msg}")
     else:
         print("Please only enter a number between 1 - 4.")
 
