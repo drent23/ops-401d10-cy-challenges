@@ -47,15 +47,12 @@ def main():
     if user_mode == '1':
         target_file = input("Please enter the file path of the word list you want to search: ")
         dict_it(target_file)
-    elif mode == '2':
+    elif user_mode == '2':
         user_word = input("Please enter a word you would like to search for in the password list: ")
         target_file = input("Please enter the file path of the word list you want to search: ")
         pass_rec(user_word, target_file)
     else: 
         print("Please only enter the number 1 or 2: ")
+
 if __name__ == "__main__":
     main()
-
-
-if __name__ == "__main__":
-    
