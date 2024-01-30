@@ -35,7 +35,7 @@ def dict_it(target_file):
 def pass_rec(user_word, target_file):
     try:
         with open(target_file, 'r') as file:
-            if user_word in (word.strip() for word in file):
+            if user_word in (word.strip().lower() for word in file):
                 print(f"The word '{user_word}' is in the word list.")
             else:
                 print(f"The word {user_word} is not in the word list.")
