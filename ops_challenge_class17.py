@@ -95,4 +95,3 @@ def main():
 if __name__ == "__main__":
     main()
     ssh_endpoint()
-    # Roger's class17 demo
