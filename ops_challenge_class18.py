@@ -78,11 +78,10 @@ def ssh_endpoint():
     except paramiko.AuthenticationException as e:
         print("Authentication failed.")
         print(e)
-
+# from Roger's class18 demo...user should enter "rockyou.txt" or a known zip file for demo purposes
 def unzip_file(target_file):
-    password = "password1234"
     with ZipFile(target_file) as f:
-        f.extractall(pwd=bytes(password, 'utf-8'))
+        f.extractall(pwd=bytes('rockyou.txt', 'utf-8'))
         print(f'The file {target_file} has been unzipped.') 
 
 def main():
@@ -101,6 +100,4 @@ def main():
         print("Please only enter the number 1, 2, or 3: ")
 
 ssh_endpoint()
-# give user ability to choose local file
-zip -er ".zip" "secret_file.txt"
 main()
