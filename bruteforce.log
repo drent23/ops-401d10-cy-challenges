@@ -1,0 +1,6 @@
+2024-02-12 11:25:39,207 - INFO -Hello, world
+2024-02-12 11:25:39,207 - WARNING -This is a warning
+2024-02-12 11:28:15,645 - INFO -Hello, world
+2024-02-12 11:28:15,645 - WARNING -This is a warning
+2024-02-12 11:28:15,645 - CRITICAL -This is critical
+2024-02-12 11:28:15,645 - DEBUG -Logging something
