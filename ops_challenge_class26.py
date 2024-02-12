@@ -6,6 +6,7 @@
 
 # import modules
 import logging
+import os
 
 # Create log object
 log = logging.getLogger("data_logger")
