@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
-# Script Name: Find/generate hashes of files using hashlib 
+# Script Name: Sig-based Malware detection pt 2
 # Author: David Renteria
-# Purpose: Tool that uses scapy to scan ports then rotates logs based on time and size and outputs File Handlers to log files and Stream Handlers to display to screen
+# Purpose: Basic Python AV tool w/ hash validation
 
 # import modules
 from sys import platform
-import os, time, hashlib
+import os, time, logging, hashlib
 
 # declare function
 
