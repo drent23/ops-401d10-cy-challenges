@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+# Author: Marco Vazquez
 # this is marco vasquez's class32 challenge solution for future reference
 
 import platform
