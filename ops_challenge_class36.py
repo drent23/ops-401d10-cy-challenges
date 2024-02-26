@@ -24,9 +24,9 @@ def telnet_grabber(target, port_num):
         print("Telnet timed out. Please try again")
     except Exception as e:
         print(f"The following error occurred: {e}")
-def nmap_grabber(target, port_num):
+def nmap_grabber(target):
     try:
-        banner = subprocess.run(['nmap', '-sV', target, str(port_num)], capture_output=True, text=True, timeout=3)
+        banner = subprocess.run(['nmap', '-sV', target], capture_output=True, text=True, timeout=3)
         print(f"Nmap banner: \n{banner.stdout}")
     except subprocess.TimeoutExpired:
         print("Nmap timed out. Please try again")
