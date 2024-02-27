@@ -8,6 +8,7 @@
 
 # import modules
 import requests
+import webbrowser
 
 # targetsite = input("Enter target site:") # Uncomment this to accept user input target site
 targetsite = "http://www.whatarecookies.com/cookietest.asp" # Comment this out if you're using the line above
@@ -30,9 +31,20 @@ def bringforthcookiemonster(): # Because why not!
 
         ''')
 
+# send cookie back to target site and get HTTP response
+http_response = requests.get(targetsite, cookie)
+
+# create .html file to capture HTTP response contents
+html_file = "response.html"
+with open(html_file, 'w') as file:
+    file.write(html_file.text)
+
 bringforthcookiemonster()
 print("Target site is " + targetsite)
 print(cookie)
+
+# open w/ firefox
+webbrowser.open_new_tab(html_file)
 
 # Add here some code to make this script perform the following:
 # - Send the cookie back to the site and receive a HTTP response
