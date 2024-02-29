@@ -48,8 +48,16 @@ webbrowser.open_new_tab(html_file)
 
 # Add here some code to make this script perform the following:
 # - Send the cookie back to the site and receive a HTTP response
+# page = requests.get(targetsite, cookies=cookie)
+# page_content = page.text
+
 # - Generate a .html file to capture the contents of the HTTP response
+# with open('/home/david/Desktop/....(path)', 'w') as file:
+#   file.write(page_content)
+
 # - Open it with Firefox
-#
+# os.system("firefox /home/david/Desktop/....(path)")
+
 # Stretch Goal
 # - Give Cookie Monster hands
+# 
